@@ -21,20 +21,31 @@ var singleNumber = function (nums) {
   // }
 
   //Better Approach
+  // let numsLength = nums.length;
+  // let maxElement = Math.max(...nums)
+
+  // let hashArray = Array(maxElement+1).fill(0);
+
+  // for (let i = 0; i < numsLength; i++) {
+  //     hashArray[nums[i]]++;
+  // }
+
+  // for (let i = 0; i < numsLength; i++) {
+  //     if (hashArray[nums[i]] === 1) {
+  //         return nums[i];
+  //     }
+  // }
+
+  // return -1;
+
+  //Optimized approach using XOR
+
+  let XOR = 0;
   let numsLength = nums.length;
-  let maxElement = Math.max(...nums);
 
-  let hashArray = Array(maxElement + 1).fill(0);
-
-  for (let i = 0; i < numsLength; i++) {
-    hashArray[nums[i]]++;
+  for (let i = 0; i < nums.length; i++) {
+    XOR ^= nums[i];
   }
 
-  for (let i = 0; i < numsLength; i++) {
-    if (hashArray[nums[i]] === 1) {
-      return nums[i];
-    }
-  }
-
-  return -1;
+  return XOR;
 };
