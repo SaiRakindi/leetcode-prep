@@ -22,7 +22,7 @@ var twoSum = function (nums, target) {
   //     }
   // }
 
-  //Optimized approach
+  //Better approach
   let numbersMap = new Map();
   for (let i = 0; i < nums.length; i++) {
     let remainingNumber = target - nums[i];
@@ -32,4 +32,21 @@ var twoSum = function (nums, target) {
     }
     numbersMap.set(nums[i], i);
   }
+
+  //Optimized approach - using greedy approach and 2 pointer
+  // let numbersArrayWithIndex = nums.map((num, index) => [num, index]);
+
+  // numbersArrayWithIndex.sort((a, b) => a[0] - b[0]);
+
+  // let leftIndex = 0, rightIndex = nums.length - 1;
+
+  // while (leftIndex < rightIndex) {
+  //     let sum = numbersArrayWithIndex[leftIndex][0] + numbersArrayWithIndex[rightIndex][0];
+
+  //     if (sum === target) {
+  //         return [numbersArrayWithIndex[leftIndex][1], numbersArrayWithIndex[rightIndex][1]];
+  //     }
+  //     else if (sum < target) leftIndex++;
+  //     else rightIndex--;
+  // }
 };
