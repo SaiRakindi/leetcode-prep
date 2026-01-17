@@ -17,10 +17,9 @@ var twoSum = function (nums, target) {
   let numsLength = nums.length;
   for (let i = 0; i < numsLength; i++) {
     for (let j = 0; j < numsLength; j++) {
-      if (i !== j) {
-        if (nums[i] + nums[j] === target) {
-          return [i, j];
-        }
+      if (i === j) continue;
+      if (nums[i] + nums[j] === target) {
+        return [i, j];
       }
     }
   }
