@@ -4,7 +4,6 @@
  * @return {number[]}
  */
 var twoSum = function (nums, target) {
-  //using js array methods
   // for (let i = 0; i < nums.length; i++) {
   //     let requiredNumber = target - nums[i]
   //     let requiredNumberIndex = nums.indexOf(requiredNumber)
@@ -14,15 +13,23 @@ var twoSum = function (nums, target) {
   // }
 
   //Brute force
+  // let numsLength = nums.length;
+  // for (let i = 0; i < numsLength; i++) {
+  //     for (let j = i + 1; j < numsLength; j++) {
+  //         if (nums[i] + nums[j] === target) {
+  //             return [i,j]
+  //         }
+  //     }
+  // }
 
-  let numsLength = nums.length;
-  for (let i = 0; i < numsLength; i++) {
-    for (let j = i + 1; j < numsLength; j++) {
-      if (nums[i] + nums[j] === target) {
-        return [i, j];
-      }
+  //Optimized approach
+  let numbersMap = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    let remainingNumber = target - nums[i];
+
+    if (numbersMap.has(remainingNumber)) {
+      return [numbersMap.get(remainingNumber), i];
     }
+    numbersMap.set(nums[i], i);
   }
-
-  //Optimised approach
 };
