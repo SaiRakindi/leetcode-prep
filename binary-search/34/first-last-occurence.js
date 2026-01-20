@@ -9,11 +9,18 @@ var searchRange = function (nums, target) {
 
   for (let i = 0; i < nums.length; i++) {
     if (nums[i] === target) {
-      if (firstIndex === -1) {
-        firstIndex = i;
-        lastIndex = i;
-      } else if (firstIndex !== -1 && lastIndex !== -1) {
-        lastIndex = i;
+      for (let i = 0; i < nums.length; i++) {
+        //   if (firstIndex === -1) {
+        //     firstIndex = i;
+        //     lastIndex = i;
+        //   } else if (firstIndex !== -1 && lastIndex !== -1) {
+        //     lastIndex = i;
+        //   }
+
+        if (nums[i] === target) {
+          if (firstIndex === -1) firstIndex = i;
+          lastIndex = i;
+        }
       }
     }
   }
