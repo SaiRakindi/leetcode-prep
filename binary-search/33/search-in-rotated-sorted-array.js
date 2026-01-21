@@ -4,6 +4,9 @@
  * @return {number}
  */
 var search = function (nums, target) {
+  //Brute force approach - Linear search through out the array
+
+  //Optimial approach using binary search
   let numsLength = nums.length;
   let low = 0,
     high = numsLength - 1;
