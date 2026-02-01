@@ -4,28 +4,40 @@
  */
 var groupAnagrams = function (strs) {
   //Brute force appraoach with lesser beats
-  let result = [];
-  let visited = new Set();
+  // let result = [];
+  // let visited = new Set();
 
-  let sortedAnagrams = strs.map((str) => str.split("").sort().join(""));
+  // let sortedAnagrams = strs.map((str) => str.split("").sort().join(""))
 
-  for (let i = 0; i < strs.length; i++) {
-    if (visited.has(i)) continue;
+  // for (let i = 0; i < strs.length; i++) {
+  //     if (visited.has(i)) continue;
 
-    let anagram = [];
-    anagram.push(strs[i]);
-    visited.add(i);
+  //     let anagram = [];
+  //     anagram.push(strs[i])
+  //     visited.add(i);
 
-    for (let j = i + 1; j < sortedAnagrams.length; j++) {
-      if (sortedAnagrams[i] === sortedAnagrams[j]) {
-        anagram.push(strs[j]);
-        visited.add(j);
-      }
-    }
+  //     for (let j = i + 1; j < sortedAnagrams.length; j++) {
+  //         if (sortedAnagrams[i] === sortedAnagrams[j]) {
+  //             anagram.push(strs[j])
+  //             visited.add(j)
+  //         }
+  //     }
 
-    anagram.sort();
-    result.push(anagram);
+  //     anagram.sort()
+  //     result.push(anagram);
+  // }
+
+  // return result;
+
+  //Optimized approach;
+  let anagramObj = {};
+
+  for (let str of strs) {
+    let key = str.split("").sort().join("");
+
+    if (!anagramObj[key]) anagramObj[key] = [];
+    anagramObj[key].push(str);
   }
 
-  return result;
+  return Object.values(anagramObj);
 };
