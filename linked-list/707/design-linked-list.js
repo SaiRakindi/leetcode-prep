@@ -1,6 +1,6 @@
 function Node(val) {
   this.val = val;
-  this.head = null;
+  this.next = null;
 }
 
 var MyLinkedList = function () {
@@ -13,12 +13,11 @@ var MyLinkedList = function () {
  * @return {number}
  */
 MyLinkedList.prototype.get = function (index) {
-  if (index < 0 || index > this.size) return -1;
+  if (index < 0 || index >= this.size) return -1;
 
   let current = this.head;
-  for (let i = 0; i < index; i++) {
-    current = current.next;
-  }
+
+  for (let i = 0; i < index; i++) current = current.next;
 
   return current.val;
 };
@@ -27,26 +26,95 @@ MyLinkedList.prototype.get = function (index) {
  * @param {number} val
  * @return {void}
  */
-MyLinkedList.prototype.addAtHead = function (val) {};
+MyLinkedList.prototype.addAtHead = function (val) {
+  let newNode = new Node(val);
+
+  newNode.next = this.head;
+  this.head = newNode;
+
+  this.size++;
+};
 
 /**
  * @param {number} val
  * @return {void}
  */
-MyLinkedList.prototype.addAtTail = function (val) {};
+MyLinkedList.prototype.addAtTail = function (val) {
+  let newNode = new Node(val);
+
+  if (this.head === null) {
+    newNode.next = this.head;
+    this.head = newNode; //Empty list: new node becomes the head
+  } else {
+    let current = this.head;
+
+    while (current.next !== null) {
+      //check for the last element to find null;
+      current = current.next;
+    }
+
+    current.next = newNode; //Attach the new node at the end.
+  }
+
+  this.size++;
+};
 
 /**
  * @param {number} index
  * @param {number} val
  * @return {void}
  */
-MyLinkedList.prototype.addAtIndex = function (index, val) {};
+MyLinkedList.prototype.addAtIndex = function (index, val) {
+  if (index < 0 || index > this.size) return;
+
+  let newNode = new Node(val);
+
+  if (index === 0) {
+    newNode.next = this.head;
+    this.head = newNode;
+
+    this.size++;
+
+    return;
+  }
+
+  let current = this.head;
+
+  for (let i = 0; i < index - 1; i++) {
+    current = current.next;
+  }
+
+  //New node points to the current node and current node points to the new node;
+  newNode.next = current.next;
+  current.next = newNode;
+
+  this.size++;
+};
 
 /**
  * @param {number} index
  * @return {void}
  */
-MyLinkedList.prototype.deleteAtIndex = function (index) {};
+MyLinkedList.prototype.deleteAtIndex = function (index) {
+  if (index < 0 || index >= this.size) return;
+
+  if (index === 0) {
+    this.head = this.head.next;
+    this.size--;
+
+    return;
+  }
+
+  let current = this.head;
+
+  for (let i = 0; i < index - 1; i++) {
+    current = current.next;
+  }
+
+  current.next = current.next.next;
+
+  this.size--;
+};
 
 /**
  * Your MyLinkedList object will be instantiated and called as such:
