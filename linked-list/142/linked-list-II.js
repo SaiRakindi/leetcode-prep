@@ -22,5 +22,6 @@ var detectCycle = function (head) {
     head = head.next;
   }
 
+  //Return null if there is no cycle node
   return null;
 };
