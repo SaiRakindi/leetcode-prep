@@ -11,33 +11,50 @@
  * @return {ListNode}
  */
 var removeNthFromEnd = function (head, n) {
-  let LLLength = 0,
-    temp = head;
+  //Brute force - TC: O(2N), SC: O(1)
+  // let LLLength = 0, temp = head;
 
-  while (temp) {
-    LLLength++;
-    temp = temp.next;
+  // while (temp) {
+  //     LLLength++;
+  //     temp = temp.next;
+  // }
+
+  // if (n === LLLength) {
+  //     let newHead = head.next;
+
+  //     return newHead;
+  // }
+
+  // let index = LLLength - n, temp1 = head;
+
+  // while (temp1) {
+  //     index--;
+
+  //     if (index === 0) break;
+
+  //     temp1 = temp1.next;
+  // }
+
+  // let newNode = temp1.next.next;
+  // temp1.next = newNode;
+
+  // return head;
+
+  //Optimized approach
+  let fast = head,
+    slow = head;
+
+  for (let i = 0; i < n; i++) fast = fast.next;
+
+  if (!fast) return head.next;
+
+  while (fast.next) {
+    fast = fast.next;
+    slow = slow.next;
   }
 
-  if (n === LLLength) {
-    let newHead = head.next;
-
-    return newHead;
-  }
-
-  let index = LLLength - n,
-    temp1 = head;
-
-  while (temp1) {
-    index--;
-
-    if (index === 0) break;
-
-    temp1 = temp1.next;
-  }
-
-  let newNode = temp1.next.next;
-  temp1.next = newNode;
+  let newHead = slow.next;
+  slow.next = slow.next.next;
 
   return head;
 };
