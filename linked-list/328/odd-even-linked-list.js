@@ -10,35 +10,55 @@
  * @return {ListNode}
  */
 var oddEvenList = function (head) {
-  let arr = [],
-    temp = head;
+  //Brute force appraoch
+  // let arr = [], temp = head;
+
+  // if (!head || !head.next) return head
+
+  // while (temp && temp.next) {
+  //     arr.push(temp.val);
+  //     temp = temp.next.next;
+  // }
+
+  // if (temp) arr.push(temp.val);
+
+  // temp = head.next;
+
+  // while (temp && temp.next) {
+  //     arr.push(temp.val);
+  //     temp = temp.next.next;
+  // }
+
+  // if (temp) arr.push(temp.val)
+
+  // let i = 0;
+  // let temp1 = head;
+
+  // while (temp1) {
+  //     temp1.val = arr[i];
+  //     i++;
+  //     temp1 = temp1.next;
+  // }
+
+  // return head; //TC: O(2N), SC: O(N)
+
+  //Optimized approach
 
   if (!head || !head.next) return head;
 
-  while (temp && temp.next) {
-    arr.push(temp.val);
-    temp = temp.next.next;
+  let odd = head,
+    even = head.next,
+    evenHead = head.next;
+
+  while (even && even.next) {
+    odd.next = odd.next.next;
+    even.next = even.next.next;
+
+    odd = odd.next;
+    even = even.next;
   }
 
-  if (temp) arr.push(temp.val);
+  odd.next = evenHead;
 
-  temp = head.next;
-
-  while (temp && temp.next) {
-    arr.push(temp.val);
-    temp = temp.next.next;
-  }
-
-  if (temp) arr.push(temp.val);
-
-  let i = 0;
-  let temp1 = head;
-
-  while (temp1) {
-    temp1.val = arr[i];
-    i++;
-    temp1 = temp1.next;
-  }
-
-  return head;
+  return head; //TC:O(N), SC: O(1)
 };
