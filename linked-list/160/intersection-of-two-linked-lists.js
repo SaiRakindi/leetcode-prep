@@ -75,6 +75,27 @@ intersectVal == listA[skipA] == listB[skipB] if listA and listB intersect.
  * @return {ListNode}
  */
 var getIntersectionNode = function (headA, headB) {
+  //Brute force
+  // let nodeSet = new Set();
+
+  // let temp = headA;
+
+  // while (temp) {
+  //     nodeSet.add(temp);
+  //     temp = temp.next;
+  // }
+
+  // let temp1 = headB;
+
+  // while (temp1) {
+  //     if (nodeSet.has(temp1)) return temp1;
+
+  //     temp1 = temp1.next;
+  // }
+
+  // return null;
+
+  //Optimal approach
   let list1 = headA,
     list2 = headB;
 
