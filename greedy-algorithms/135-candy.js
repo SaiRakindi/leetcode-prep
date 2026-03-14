@@ -2,60 +2,61 @@
  * @param {number[]} ratings
  * @return {number}
  */
-var candy = function (ratings) {
-  // Bruteforce approach - TC: O(3N), SC: O(2N)
+var candy = function(ratings) {
+    // Bruteforce approach - TC: O(3N), SC: O(2N)
 
-  let ratingsLength = ratings.length;
+    // let ratingsLength = ratings.length;
 
-  // let left = Array(ratingsLength).fill(1);
-  // let right = Array(ratingsLength).fill(1);
-  let left = [],
-    right = [];
+    // // let left = Array(ratingsLength).fill(1);
+    // // let right = Array(ratingsLength).fill(1);
+    // let left = [], right = [];
 
-  (left[0] = 1), (right[ratingsLength - 1] = 1);
+    // left[0] = 1, right[ratingsLength - 1] = 1;
 
-  for (let i = 1; i < ratingsLength; i++) {
-    if (ratings[i] > ratings[i - 1]) left[i] = left[i - 1] + 1;
-    else left[i] = 1;
-  }
+    // for (let i = 1; i < ratingsLength; i++) {
+    //     if (ratings[i] > ratings[i - 1]) left[i] = left[i - 1] + 1;
+    //     else left[i] = 1;
+    // }
 
-  for (let i = ratingsLength - 2; i >= 0; i--) {
-    if (ratings[i] > ratings[i + 1]) right[i] = right[i + 1] + 1;
-    else right[i] = 1;
-  }
+    // for (let i = ratingsLength - 2; i >= 0; i--) {
+    //     if (ratings[i] > ratings[i + 1]) right[i] = right[i + 1] + 1;
+    //     else right[i] = 1;
+    // }
 
-  let sum = 0;
-  for (let i = 0; i < ratingsLength; i++) {
-    sum += Math.max(left[i], right[i]);
-  }
+    // let sum = 0;
+    // for (let i = 0; i < ratingsLength; i++) {
+    //     sum += Math.max(left[i], right[i]);
+    // }
 
-  return sum;
+    // return sum;
 
-  // //Slightly better approach
-  // let ratingsLength = ratings.length;
+    //Optimal approach
+    let sum = 1, index = 1, ratingsLength = ratings.length;
 
-  // let left = Array(ratingsLength).fill(1);
-  // // let right = Array(ratingsLength).fill(1);
+    while (index < ratingsLength) {
+        if (ratings[index] === ratings[index - 1]) {
+            sum += 1;
+            index++;
+            continue;
+        }
 
-  // left[0] = 1;
-  // //  right[ratingsLength - 1] = 1;
+        let peak = 1;
+        while (index < ratingsLength && ratings[index] > ratings[index - 1]) {
+            peak++;
+            sum += peak;
+            index++;
+        }
 
-  // for (let i = 1; i < ratingsLength; i++) {
-  //     if (ratings[i] > ratings[i - 1]) left[i] = left[i - 1] + 1;
-  //     else left[i] = 1;
-  // }
+        let down = 1;
+        while (index < ratingsLength && ratings[index] < ratings[index - 1]) {
+            sum += down;
+            index++;
+            down++;
+        }
 
-  // let current = 1, right = 1, sum = Math.max(1, left[ratingsLength - 1]);
+        if (down > peak) sum+= down - peak;
+    }
 
-  // for (let i = ratingsLength - 2; i >= 0; i--) {
-  //     if (ratings[i] > ratings[i + 1]) {
-  //         current = right + 1;
-  //         right = current;
-  //     }
-  //     else current = 1;
+    return sum;
 
-  //     sum += Math.max(left[i], current);
-  // }
-
-  // return sum;
 };
